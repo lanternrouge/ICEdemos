@@ -35,7 +35,7 @@ Synthetic is stored as follows:
 Note:  in order to pass command line arguments to these scripts they
 must be run with --args as follows:
 
-R --no-save [ --silent ] < Generate.R --args truthFile nObs repID resultsDir
+R --no-save [ --silent ] < Generate.R --args truthFile resultsDir
 R --no-save [ --silent ] < Estimate.R --args nObs repID resultsDir
 R --no-save [ --silent ] < Analyze.R  --args truthFile resultsDir
 
