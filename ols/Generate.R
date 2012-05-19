@@ -19,7 +19,6 @@
 
 #--------------------
 # Setup parameters of experiments
-library( R.utils )
 
 vnObs <- c( 10, 100, 1000, 10000 )     # Number observations in each experiment
 nRep  <- 10   # number of replications per experiment
@@ -68,7 +67,7 @@ for( nObs in vnObs ) {
     szDataFile  <- paste( 'synthetic.', repID, '.txt', sep='' )# name of data file
     szOutFile   <- paste( szObsDir, '/', szDataFile, sep='' )  # full path to data 
 
-    mkdirs( szObsDir )
+    dir.create( szObsDir, recursive=TRUE )
 
     # Draw X always draw maximum data to ensure smaller datasets
     # are contained in larger ones.  This ensures data has correct

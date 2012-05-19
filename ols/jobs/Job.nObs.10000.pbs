@@ -1,0 +1,45 @@
+#!/bin/bash
+#PBS -l nodes=1:ppn=1,walltime=00:15:00
+#PBS -q fast
+#PBS -t 1-10
+#PBS -m n
+
+# This script runs embarrassingly parallel estimation jobs
+# in parallel using the PBS qsub mechanism.  You need to run
+# this on a machine which supports qsub, obviously.
+#
+# If you Generate data with more observations or replications,
+# adjust the range of the parameter sweep (option PBS -t ) above.
+# Currently, this is setup to automatically run jobs indexed 1..10.
+# This index of a job is stored in PBS_ARRAYID.
+#
+# You also need to adjust the following variables for your configuration:
+#
+#   nObs        : the number of observations in the experiment you want to estimate
+#   szRootDir   : root directory of data files
+# 
+#
+
+# Configuration
+nObs=10000
+szRootDir=/gpfs/pads/projects/CI-SES000069/sbox/icedemos/ols/data
+
+# Load R module so we can use R
+module load R/2.14.0
+
+# Store parameter sweep index
+repID=${PBS_ARRAYID}
+
+# Build name of data file to estimate
+szFile=${szRootDir}/nObs.${nObs}/PointEst.${repID}.txt
+
+echo
+echo '>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>'
+echo '====>>>> Estimate OLS '
+echo '         nObs  : ' ${nObs}
+echo '         RepID : ' ${repID}
+echo '    Input File : ' ${szFile}
+echo '<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<'
+echo
+
+R --no-save < ${szRootDir}/../Estimate.R --args ${nObs} ${repID} ${szRootDir}

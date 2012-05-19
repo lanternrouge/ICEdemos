@@ -47,3 +47,22 @@ dataFile        : data to estimate OLS on
 
 The --silent will surpress echoing of the R commands which are executed.
 
+--
+
+Running using PBS
+
+To run the estimation jobs in parallel:
+
+  1)  cd jobs
+  2)  Edit Job.nObs.NN.pbs for your configuration
+  3)  Submit jobs via
+
+      $ qsub Job.nObs.100.pbs
+
+  4)  Examine output and error files.
+
+for help, use the commands:
+
+      $ man qsub 
+      $ man qstat
+
