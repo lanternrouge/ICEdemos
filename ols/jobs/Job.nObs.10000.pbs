@@ -24,6 +24,16 @@
 nObs=10000
 szRootDir=/gpfs/pads/projects/CI-SES000069/sbox/icedemos/ols/data
 
+# Perform blacklight configuration if necessary
+black=`hostname | fgrep black `
+if [[ ${black} == "" ]]
+then
+  echo Not on blacklight...skipping blacklight setup.
+else
+  echo On blacklight...loading configuration to use module facility.
+  source /usr/share/modules/init/bash
+fi
+
 # Load R module so we can use R
 module load R/2.14.0
 
